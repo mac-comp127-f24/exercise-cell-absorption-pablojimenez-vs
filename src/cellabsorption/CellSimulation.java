@@ -37,14 +37,27 @@ public class CellSimulation {
         for (Cell cell : cellList) {
             Point canvasCenter = new Point(canvas.getWidth() / 2.0, canvas.getHeight() / 2.0);
             cell.moveAround(canvasCenter);
-            cell.grow(2);
+            handleCellInteraction();
 
             canvas.draw();
             // canvas.pause(10);
         }
+        
     }
         
     }
+
+    private void handleCellInteraction() {
+        for (int i = 0; i < cellList.size(); i++) {
+            Cell cell0 = cellList.get(i);
+            for (int j = i + 1; j < cellList.size(); j++) {
+                Cell cell1 = cellList.get(j);
+                // TODO: insert call here to make cell0 interact with cell1
+                cell1.interactWith(cell0);
+            }
+        }
+    }
+
 
     public CellSimulation() {
         canvas = new CanvasWindow("Cell Absorption", 800, 800);
