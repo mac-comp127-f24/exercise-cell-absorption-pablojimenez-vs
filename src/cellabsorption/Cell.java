@@ -9,7 +9,6 @@ import edu.macalester.graphics.Point;
 
 public class Cell {
 
-    private Random rand = new Random();
     private Ellipse shape;
     private double radius;
     private double direction;
@@ -18,17 +17,7 @@ public class Cell {
         WIGGLINESS = 0.2,
         WANDER_FROM_CENTER = 60000;
 
-    public void populateCells(CanvasWindow canvas) {
-    double size = rand.nextInt(5) + 2;
-    createCell(
-    rand.nextDouble() * (canvas.getWidth() - size),
-    rand.nextDouble() * (canvas.getWidth() - size),
-    size,
-    Color.getHSBColor(rand.nextFloat(), rand.nextFloat() * 0.5f + 0.1f, 1));
-    canvas.add(shape);
-    }
-
-    private void createCell(double x, double y, double radius, Color color) {
+    public Cell(double x, double y, double radius, Color color) {
         shape = new Ellipse(x, y, radius * 2, radius * 2);
         shape.setFillColor(color);
         this.radius = radius;
@@ -37,6 +26,10 @@ public class Cell {
 
     public void grow(double amount) {
         setRadius(radius + amount);
+    }
+
+    public Ellipse getShape() {
+        return shape;
     }
 
     private void setRadius(double newRadius) {
